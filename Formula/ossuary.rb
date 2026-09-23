@@ -1,7 +1,6 @@
 class Ossuary < Formula
   desc "Personal archive of everything, with everything known about it"
   homepage "https://github.com/sniner/ossuary"
-  version "0.10.0"
   license "Apache-2.0"
 
   # ossuary-extract-pdf reads documents through poppler's pdftotext.
