@@ -6,10 +6,13 @@ Homebrew formulae for [sniner](https://github.com/sniner)'s tools.
 $ brew install sniner/tap/ossuary
 ```
 
-Or tap once and install by name:
+That trusts the one formula it names. Homebrew 6 loads nothing from a
+tap it was not told to trust, so installing by short name takes a
+`brew trust` first, for the formula or for the whole tap:
 
 ```console
 $ brew tap sniner/tap
+$ brew trust sniner/tap
 $ brew install ossuary
 ```
 
