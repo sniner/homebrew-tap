@@ -74,7 +74,7 @@ def main():
     pending_url = None
     for i, line in enumerate(lines):
         if m := URL_LINE.match(line):
-            pending_url = m.group(2).replace(f"/v{old}/", f"/v{new}/")
+            pending_url = m.group(2).replace(f"v{old}", f"v{new}")
             lines[i] = f"{m.group(1)}{pending_url}{m.group(3)}\n"
         elif m := SHA_LINE.match(line):
             if pending_url is None:
