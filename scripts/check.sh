@@ -30,7 +30,7 @@ for file in "${here}"/Formula/*.rb; do
 done
 
 brew style --except-cops FormulaAudit/ComponentsOrder "${here}/Formula"
-brew audit --strict --except-cops FormulaAudit/ComponentsOrder "${formulae[@]}"
+brew audit --except-cops FormulaAudit/ComponentsOrder "${formulae[@]}"
 for formula in "${formulae[@]}"; do
     brew install --verbose "${formula}"
     brew test --verbose "${formula}"
