@@ -4,6 +4,9 @@ class Ossuary < Formula
   version "0.10.0"
   license "Apache-2.0"
 
+  # ossuary-extract-pdf reads documents through poppler's pdftotext.
+  depends_on "poppler"
+
   on_macos do
     url "https://github.com/sniner/ossuary/releases/download/v0.10.0/ossuary-v0.10.0-macos-universal.tar.gz"
     sha256 "d872ee16ae13c88e35f3489b0fe0453eb51a531f920f82c0d46a267e265d8e09"
@@ -19,9 +22,6 @@ class Ossuary < Formula
       sha256 "089e02aa44a0153a2687a11eac5a2e7528a6672c2128b27bb6f52329aae895e1"
     end
   end
-
-  # ossuary-extract-pdf reads documents through poppler's pdftotext.
-  depends_on "poppler"
 
   def install
     bin.install "ossuary", "ossuary-mount", "ossuary-mailvault", "ossuary-fix",
