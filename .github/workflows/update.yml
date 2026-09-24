@@ -1,8 +1,11 @@
 name: Update formulae
 
-# Once a day, ask each packaged project for its newest release and bring
-# its formula along. The projects know nothing of this tap; this is the
-# only place that watches them.
+# Once a day, check each formula's project for a newer release and update
+# the formula. The projects do not know about this tap; this workflow is
+# the only place that follows their releases.
+#
+# A formula that cannot be updated does not hold back the others: they
+# are checked and committed, and the run fails at the end.
 
 on:
   schedule:
@@ -10,31 +13,91 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   update:
-    name: Bring formulae to the latest releases
+    name: Update formulae to the latest releases
     runs-on: ubuntu-latest
+    outputs:
+      updates: ${{ steps.update.outputs.updates }}
+      outcome: ${{ steps.update.outcome }}
     steps:
       - uses: actions/checkout@v7
 
-      - name: Rewrite formulae behind their project's release
+      - name: Update every formula whose project has a newer release
         id: update
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
+        run: scripts/update-formula.py
+
+      - name: Upload the updated formulae
+        if: steps.update.outputs.updates != ''
+        uses: actions/upload-artifact@v7
+        with:
+          name: formulae
+          path: Formula/
+          retention-days: 1
+
+  check:
+    name: Check the updated formulae on ${{ matrix.os }}
+    needs: update
+    if: needs.update.outputs.updates != ''
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: formulae
+          path: Formula
+
+      - name: Audit, install and test the updated formulae
+        env:
+          UPDATES: ${{ needs.update.outputs.updates }}
         run: |
-          scripts/update-formula.py ossuary sniner/ossuary
+          names=()
+          while read -r name _; do
+              names+=("${name}")
+          done <<< "${UPDATES}"
+          scripts/check.sh "${names[@]}"
 
-      - name: Audit, install and test what changed
-        if: steps.update.outputs.summary != ''
-        run: scripts/check.sh
+  commit:
+    name: Commit and push
+    needs: [update, check]
+    if: always() && needs.update.result == 'success' && needs.check.result != 'failure' && needs.check.result != 'cancelled'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
 
-      - name: Commit and push
-        if: steps.update.outputs.summary != ''
+      - if: needs.update.outputs.updates != ''
+        uses: actions/download-artifact@v8
+        with:
+          name: formulae
+          path: Formula
+
+      - name: Commit each updated formula and push
+        if: needs.update.outputs.updates != ''
+        env:
+          UPDATES: ${{ needs.update.outputs.updates }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Formula
-          git commit -m "Update ${{ steps.update.outputs.summary }}"
+          while read -r name old arrow new; do
+              git add "Formula/${name}.rb"
+              git commit -m "Update ${name} ${old} ${arrow} ${new}"
+          done <<< "${UPDATES}"
           git push
+
+      - name: Fail the run if a formula could not be updated
+        if: needs.update.outputs.outcome == 'failure'
+        run: |
+          echo "::error::Some formulae could not be updated, see the log of the update job"
+          exit 1
