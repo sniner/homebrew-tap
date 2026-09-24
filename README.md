@@ -16,9 +16,12 @@ $ brew trust sniner/tap
 $ brew install ossuary
 ```
 
-| Formula | Installs | Project |
-|---|---|---|
-| `ossuary` | `ossuary`, `ossuary-mount`, `ossuary-mailvault`, `ossuary-fix` and the four extractors | [sniner/ossuary](https://github.com/sniner/ossuary) |
+| Formula | Installs | Runs on | Project |
+|---|---|---|---|
+| `exhume` | `exhume` | macOS | [sniner/exhume](https://github.com/sniner/exhume) |
+| `exorcise` | `exorcise` | macOS | [sniner/exorcise](https://github.com/sniner/exorcise) |
+| `ossuary` | `ossuary`, `ossuary-mount`, `ossuary-mailvault`, `ossuary-fix` and the four extractors | macOS, Linux | [sniner/ossuary](https://github.com/sniner/ossuary) |
+| `uwhat` | `uwhat` | macOS on Apple Silicon | [sniner/uwhat](https://github.com/sniner/uwhat) |
 
 The formulae install the binaries a project's GitHub release carries,
 no compiler needed. A workflow in this repository asks each project for
