@@ -20,6 +20,7 @@ $ brew install ossuary
 |---|---|---|---|
 | `exhume` | `exhume` | macOS | [sniner/exhume](https://github.com/sniner/exhume) |
 | `exorcise` | `exorcise` | macOS | [sniner/exorcise](https://github.com/sniner/exorcise) |
+| `fifi` | `fifi` | macOS | [sniner/fifi](https://github.com/sniner/fifi) |
 | `ossuary` | `ossuary`, `ossuary-mount`, `ossuary-mailvault`, `ossuary-fix` and the four extractors | macOS, Linux | [sniner/ossuary](https://github.com/sniner/ossuary) |
 | `uwhat` | `uwhat` | macOS on Apple Silicon | [sniner/uwhat](https://github.com/sniner/uwhat) |
 
