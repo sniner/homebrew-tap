@@ -23,6 +23,7 @@ $ brew install ossuary
 | `fifi` | `fifi` | macOS | [sniner/fifi](https://github.com/sniner/fifi) |
 | `ossuary` | `ossuary`, `ossuary-mount`, `ossuary-mailvault`, `ossuary-fix` and the four extractors | macOS, Linux | [sniner/ossuary](https://github.com/sniner/ossuary) |
 | `uwhat` | `uwhat` | macOS on Apple Silicon | [sniner/uwhat](https://github.com/sniner/uwhat) |
+| `viddeck` | `viddeck` | macOS | [sniner/viddeck](https://github.com/sniner/viddeck) |
 
 The formulae install the binaries a project's GitHub release carries,
 no compiler needed. A workflow in this repository asks each project for
