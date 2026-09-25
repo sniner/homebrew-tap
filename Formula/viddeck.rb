@@ -1,8 +1,8 @@
 class Viddeck < Formula
   desc "Browse and play a local video collection in the web browser"
   homepage "https://github.com/sniner/viddeck"
-  url "https://github.com/sniner/viddeck/releases/download/v0.5.0/viddeck-v0.5.0-macos-universal"
-  sha256 "a669efd02d65dff473d48960843166da7a2a8bbcfdb1fe0e81fa477e6bf65379"
+  url "https://github.com/sniner/viddeck/releases/download/v0.5.1/viddeck-v0.5.1-macos-universal"
+  sha256 "96aa393c93d1f2fc15fbd6502ebd8fbf14e2d8b6bb16b734525d350ddc0624c9"
   license "Apache-2.0"
 
   depends_on "ffmpeg"
