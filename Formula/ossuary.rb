@@ -24,7 +24,7 @@ class Ossuary < Formula
 
   def install
     bin.install "ossuary", "ossuary-mount", "ossuary-mailvault", "ossuary-fix",
-                "ossuary-extract-image", "ossuary-extract-mail",
+                "ossuary-sync", "ossuary-extract-image", "ossuary-extract-mail",
                 "ossuary-extract-packed", "ossuary-extract-pdf"
   end
 
@@ -40,6 +40,7 @@ class Ossuary < Formula
   test do
     assert_match version.to_s, shell_output("#{bin}/ossuary --version")
     assert_match version.to_s, shell_output("#{bin}/ossuary-mailvault --version")
+    assert_match version.to_s, shell_output("#{bin}/ossuary-sync --version")
     assert_match "pdf", shell_output("#{bin}/ossuary-extract-pdf --identify")
   end
 end
