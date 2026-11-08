@@ -7,18 +7,18 @@ class Ossuary < Formula
   depends_on "poppler"
 
   on_macos do
-    url "https://github.com/sniner/ossuary/releases/download/v0.19.0/ossuary-v0.19.0-macos-universal.tar.gz"
-    sha256 "a212fe5ba3aae03bfe88485c454fa51058daac651e973c8e157dedb31c50405b"
+    url "https://github.com/sniner/ossuary/releases/download/v0.20.0/ossuary-v0.20.0-macos-universal.tar.gz"
+    sha256 "9b7501f7591ccb25dafd377400b9830b3444d7e4ebf73c8eb66ac6d5b173be6c"
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/sniner/ossuary/releases/download/v0.19.0/ossuary-v0.19.0-x86_64-linux-musl.tar.gz"
-      sha256 "19a9e0a5621d5faf9c63e39b08acfee40881be02a4e4b60ffbfbe6a49ccbcadf"
+      url "https://github.com/sniner/ossuary/releases/download/v0.20.0/ossuary-v0.20.0-x86_64-linux-musl.tar.gz"
+      sha256 "737fd3615bef733565c48c8bcbbc5ea9124df3f9671728a7cdd75e97946d407c"
     end
     on_arm do
-      url "https://github.com/sniner/ossuary/releases/download/v0.19.0/ossuary-v0.19.0-aarch64-linux-musl.tar.gz"
-      sha256 "0ccf3fd7a60261f949408700539d073e89308a39d32bc9957ecc587ac11c243d"
+      url "https://github.com/sniner/ossuary/releases/download/v0.20.0/ossuary-v0.20.0-aarch64-linux-musl.tar.gz"
+      sha256 "69a8ea7998fa24dad4319f39d0bffaf4399e114a5bd084aa81edb58e324c1336"
     end
   end
 
